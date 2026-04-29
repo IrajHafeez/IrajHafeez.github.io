@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iraj Hafeez · Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+:root{
+  --bg:#0a0a0f;--bg2:#0f0f18;--card:#16161f;--card2:#1c1c28;
+  --border:#2a2a3a;--border2:#333348;--accent:#7c6fff;--accent2:#a78bfa;
+  --accent3:#c4b5fd;--text:#e8e8f0;--text2:#9898b0;--green:#10b981;
+}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
+
+/* ── ANIMATIONS ── */
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideLeft{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideRight{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+@keyframes rotateBorder{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.85)}to{opacity:1;transform:scale(1)}}
+@keyframes typewriter{from{width:0}to{width:100%}}
+
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+.reveal-scale{opacity:0;transform:scale(0.9);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal-scale.visible{opacity:1;transform:scale(1)}
+
+/* stagger delays */
+.d1{transition-delay:0.1s}.d2{transition-delay:0.2s}.d3{transition-delay:0.3s}
+.d4{transition-delay:0.4s}.d5{transition-delay:0.5s}.d6{transition-delay:0.6s}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 60px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);animation:fadeIn 0.8s ease}
+.logo{font-family:'Playfair Display',serif;font-size:22px;color:var(--text);letter-spacing:-0.5px}
+.logo em{font-style:italic;color:var(--accent2)}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--text2);font-size:13px;font-weight:500;letter-spacing:0.5px;transition:color 0.2s;text-transform:uppercase;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--accent2);transition:width 0.3s}
+.nav-links a:hover{color:var(--accent3)}
+.nav-links a:hover::after{width:100%}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 60px 80px;position:relative;overflow:hidden}
+.hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(124,111,255,0.1) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;animation:float 6s ease-in-out infinite}
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(124,111,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(124,111,255,0.03) 1px,transparent 1px);background-size:50px 50px;pointer-events:none}
+.hero-inner{max-width:1000px;margin:0 auto;width:100%;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border2);background:var(--card);padding:8px 16px;border-radius:50px;font-size:12px;color:var(--text2);margin-bottom:40px;letter-spacing:0.3px;animation:fadeUp 0.8s ease 0.2s both}
+.hero-badge-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(56px,9vw,110px);font-weight:700;line-height:0.95;letter-spacing:-3px;margin-bottom:8px;color:var(--text);animation:fadeUp 0.8s ease 0.4s both}
+.hero h1 em{font-style:italic;color:var(--accent2)}
+.hero-role{font-size:16px;color:var(--text2);margin:28px 0 16px;font-weight:300;letter-spacing:0.5px;animation:fadeUp 0.8s ease 0.6s both}
+.hero-role span{color:var(--accent3);font-weight:500}
+.hero-desc{font-size:16px;color:var(--text2);max-width:520px;line-height:1.8;font-weight:300;margin-bottom:48px;animation:fadeUp 0.8s ease 0.7s both}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:80px;animation:fadeUp 0.8s ease 0.8s both}
+.btn-main{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;font-size:14px;font-weight:500;transition:all 0.3s;position:relative;overflow:hidden}
+.btn-main::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);transition:left 0.4s}
+.btn-main:hover::before{left:100%}
+.btn-main:hover{background:var(--accent2);transform:translateY(-3px);box-shadow:0 10px 30px rgba(124,111,255,0.3)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border:1px solid var(--border2);color:var(--text2);text-decoration:none;border-radius:8px;font-size:14px;font-weight:500;transition:all 0.3s}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent3);transform:translateY(-3px);box-shadow:0 10px 30px rgba(124,111,255,0.1)}
+.btn-linkedin{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:#0077b5;color:#fff;text-decoration:none;border-radius:8px;font-size:14px;font-weight:500;transition:all 0.3s}
+.btn-linkedin:hover{background:#005f8e;transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,119,181,0.3)}
+.hero-pills{display:flex;gap:10px;flex-wrap:wrap;animation:fadeUp 0.8s ease 1s both}
+.pill{padding:6px 14px;background:var(--card2);border:1px solid var(--border);border-radius:50px;font-size:12px;color:var(--text2);font-weight:500;transition:all 0.2s;cursor:default}
+.pill:hover{border-color:var(--accent);color:var(--accent3);transform:translateY(-2px)}
+
+/* ── SECTIONS ── */
+.section{padding:100px 60px}
+.section-inner{max-width:1000px;margin:0 auto}
+.section-eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent2);font-weight:600;margin-bottom:10px}
+.section-heading{font-family:'Playfair Display',serif;font-size:clamp(34px,5vw,52px);font-weight:700;letter-spacing:-1.5px;line-height:1.05;margin-bottom:56px;color:var(--text)}
+.section-heading em{font-style:italic;color:var(--accent2)}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0}
+
+/* ── ABOUT ── */
+#about{background:var(--bg)}
+.about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:start}
+.about-body{font-size:16px;color:var(--text2);line-height:1.9;font-weight:300}
+.about-body strong{color:var(--text);font-weight:500}
+.about-body p{margin-bottom:20px}
+.edu-stack{display:flex;flex-direction:column;gap:14px}
+.edu-card{display:flex;gap:18px;align-items:flex-start;padding:20px 22px;background:var(--card);border:1px solid var(--border);border-radius:10px;transition:all 0.3s}
+.edu-card:hover{border-color:var(--accent);transform:translateX(6px);background:var(--card2)}
+.edu-emoji{font-size:22px;line-height:1;margin-top:2px}
+.edu-name{font-size:14px;font-weight:600;color:var(--text);margin-bottom:3px}
+.edu-school{font-size:12px;color:var(--text2);margin-bottom:2px}
+.edu-subjects{font-size:11px;color:var(--text2);opacity:0.7;margin-bottom:4px}
+.edu-year{font-size:12px;color:var(--accent3);font-weight:600}
+
+/* ── SKILLS ── */
+#skills{background:var(--bg2)}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.skill-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px 22px;display:flex;align-items:center;gap:14px;transition:all 0.3s;cursor:default;position:relative;overflow:hidden}
+.skill-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,111,255,0.05),transparent);opacity:0;transition:opacity 0.3s}
+.skill-card:hover{border-color:var(--accent);background:var(--card2);transform:translateY(-5px);box-shadow:0 12px 30px rgba(124,111,255,0.15)}
+.skill-card:hover::after{opacity:1}
+.skill-icon{font-size:22px;line-height:1;transition:transform 0.3s}
+.skill-card:hover .skill-icon{transform:scale(1.2) rotate(-5deg)}
+.skill-name{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px}
+.skill-sub{font-size:11px;color:var(--text2)}
+
+/* ── PROJECTS ── */
+#projects{background:var(--bg)}
+.projects-list{display:flex;flex-direction:column;gap:16px}
+.proj{display:flex;align-items:center;gap:24px;padding:24px 28px;background:var(--card);border:1px solid var(--border);border-radius:12px;text-decoration:none;color:inherit;transition:all 0.3s;position:relative;overflow:hidden}
+.proj::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--accent),var(--accent2));transform:scaleY(0);transition:transform 0.3s;transform-origin:bottom}
+.proj:hover{border-color:var(--border2);background:var(--card2);transform:translateX(6px);box-shadow:0 8px 25px rgba(0,0,0,0.3)}
+.proj:hover::before{transform:scaleY(1)}
+.proj-num{font-family:'Playfair Display',serif;font-size:13px;color:var(--text2);width:28px;flex-shrink:0;font-style:italic}
+.proj-emoji{font-size:24px;flex-shrink:0;transition:transform 0.3s}
+.proj:hover .proj-emoji{transform:scale(1.2)}
+.proj-body{flex:1}
+.proj-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px}
+.proj-desc{font-size:13px;color:var(--text2);line-height:1.6}
+.proj-tags{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.tag{padding:3px 10px;background:rgba(124,111,255,0.1);border:1px solid rgba(124,111,255,0.2);border-radius:20px;font-size:11px;color:var(--accent3);font-weight:500;transition:all 0.2s}
+.tag:hover{background:rgba(124,111,255,0.2)}
+.proj-link{flex-shrink:0;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border:1px solid var(--border2);border-radius:6px;font-size:12px;color:var(--text2);transition:all 0.2s;font-weight:500}
+.proj:hover .proj-link{border-color:var(--accent);color:var(--accent3)}
+
+/* ── HOBBIES ── */
+#hobbies{background:var(--bg2)}
+.hobbies-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px}
+.hobby-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 20px;display:flex;flex-direction:column;align-items:center;gap:14px;transition:all 0.3s;cursor:default;text-align:center;position:relative;overflow:hidden}
+.hobby-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(124,111,255,0.08) 0%,transparent 60%);opacity:0;transition:opacity 0.4s;pointer-events:none}
+.hobby-card:hover{border-color:var(--accent);transform:translateY(-8px);box-shadow:0 20px 40px rgba(124,111,255,0.15);background:var(--card2)}
+.hobby-card:hover::before{opacity:1}
+.hobby-icon{font-size:36px;line-height:1;transition:transform 0.4s}
+.hobby-card:hover .hobby-icon{transform:scale(1.2) rotate(5deg)}
+.hobby-name{font-size:14px;font-weight:600;color:var(--text)}
+.hobby-desc{font-size:12px;color:var(--text2);line-height:1.5}
+
+/* ── CONTACT ── */
+#contact{background:var(--bg)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.contact-intro{font-size:16px;color:var(--text2);line-height:1.9;font-weight:300;margin-bottom:32px}
+.contact-cards{display:flex;flex-direction:column;gap:14px}
+.contact-card{display:flex;align-items:center;gap:16px;padding:18px 22px;background:var(--card);border:1px solid var(--border);border-radius:10px;text-decoration:none;color:inherit;transition:all 0.3s}
+.contact-card:hover{border-color:var(--accent);transform:translateX(6px);background:var(--card2);box-shadow:0 8px 25px rgba(124,111,255,0.1)}
+.cc-icon{font-size:20px;width:40px;text-align:center;flex-shrink:0}
+.cc-label{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text2);margin-bottom:3px;font-weight:500}
+.cc-val{font-size:14px;color:var(--text);font-weight:500}
+.contact-cta{margin-top:28px}
+.contact-cta a{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;font-size:14px;font-weight:500;transition:all 0.3s;position:relative;overflow:hidden}
+.contact-cta a::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);transition:left 0.4s}
+.contact-cta a:hover::before{left:100%}
+.contact-cta a:hover{background:var(--accent2);transform:translateY(-3px);box-shadow:0 10px 30px rgba(124,111,255,0.3)}
+
+/* ── FOOTER ── */
+footer{padding:28px 60px;background:var(--bg);border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+footer p{font-size:12px;color:var(--text2)}
+footer p strong{color:var(--accent2)}
+.footer-links{display:flex;gap:24px}
+.footer-links a{font-size:12px;color:var(--text2);text-decoration:none;transition:color 0.2s}
+.footer-links a:hover{color:var(--accent3)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  nav{padding:16px 20px}.nav-links{gap:20px}
+  .hero{padding:100px 20px 60px}.section{padding:70px 20px}
+  .about-grid,.contact-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:12px;padding:20px;text-align:center}
+  .proj{flex-wrap:wrap}.proj-link{width:100%}
+  .hobbies-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Iraj <em>Hafeez</em></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#hobbies">Hobbies</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="hero-badge-dot"></span>Computer Science Student &amp; Developer</div>
+    <h1>Iraj<br><em>Hafeez</em></h1>
+    <p class="hero-role">Fatima Jinnah Women University · <span>Rawalpindi, Pakistan</span></p>
+    <p class="hero-desc">Passionate about building real-world software solutions and pushing the boundaries of what code can create. From data structures to IoT — I love it all.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-main">View Projects →</a>
+      <a href="#contact" class="btn-ghost">Contact Me</a>
+      <a href="https://www.linkedin.com/in/iraj-hafeez-052743406" target="_blank" class="btn-linkedin">LinkedIn ↗</a>
+    </div>
+    <div class="hero-pills">
+      <span class="pill">C / C++</span><span class="pill">Python</span><span class="pill">Java</span>
+      <span class="pill">SQL</span><span class="pill">Linux</span><span class="pill">ESP32 IoT</span><span class="pill">Assembly</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="about" class="section">
+  <div class="section-inner">
+    <p class="section-eyebrow reveal">Who I Am</p>
+    <h2 class="section-heading reveal d1">About <em>Me</em></h2>
+    <div class="about-grid">
+      <div class="about-body reveal-left d2">
+        <p>I'm a <strong>BS Computer Science student</strong> at Fatima Jinnah Women University, Rawalpindi. My academic journey started with Matric in Science and Intermediate in ICS.</p>
+        <p>I'm passionate about <strong>software development</strong>, data structures, algorithms, databases, and system-level programming. I enjoy turning complex problems into clean, working solutions.</p>
+        <p>I love building applications that solve real-world problems — from queue-based service systems to IoT projects with ESP32 microcontrollers.</p>
+      </div>
+      <div class="edu-stack reveal-right d2">
+        <div class="edu-card"><span class="edu-emoji">🎓</span><div><div class="edu-name">BS Computer Science</div><div class="edu-school">Fatima Jinnah Women University</div><div class="edu-year">2024 – Onwards</div></div></div>
+        <div class="edu-card"><span class="edu-emoji">📐</span><div><div class="edu-name">ICS</div><div class="edu-school">Harvard College of Commerce and Sciences</div><div class="edu-subjects">Physics · Mathematics · Computer</div><div class="edu-year">2022 – 2024</div></div></div>
+        <div class="edu-card"><span class="edu-emoji">🔬</span><div><div class="edu-name">Matric — Science</div><div class="edu-school">City English School System</div><div class="edu-subjects">Physics · Chemistry · Mathematics · Biology</div><div class="edu-year">2020 – 2022</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="skills" class="section">
+  <div class="section-inner">
+    <p class="section-eyebrow reveal">What I Know</p>
+    <h2 class="section-heading reveal d1">Technical <em>Skills</em></h2>
+    <div class="skills-grid">
+      <div class="skill-card reveal-scale d1"><span class="skill-icon">🔧</span><div><div class="skill-name">C</div><div class="skill-sub">Systems Programming</div></div></div>
+      <div class="skill-card reveal-scale d2"><span class="skill-icon">⚡</span><div><div class="skill-name">C++</div><div class="skill-sub">OOP · DSA</div></div></div>
+      <div class="skill-card reveal-scale d3"><span class="skill-icon">🐍</span><div><div class="skill-name">Python</div><div class="skill-sub">Scripting · Algorithms</div></div></div>
+      <div class="skill-card reveal-scale d4"><span class="skill-icon">☕</span><div><div class="skill-name">Java</div><div class="skill-sub">OOP · GUI Apps</div></div></div>
+      <div class="skill-card reveal-scale d1"><span class="skill-icon">🗄️</span><div><div class="skill-name">SQL</div><div class="skill-sub">Oracle · Queries</div></div></div>
+      <div class="skill-card reveal-scale d2"><span class="skill-icon">🌐</span><div><div class="skill-name">HTML / CSS</div><div class="skill-sub">Web Dev</div></div></div>
+      <div class="skill-card reveal-scale d3"><span class="skill-icon">🐧</span><div><div class="skill-name">Linux</div><div class="skill-sub">CLI · Shell</div></div></div>
+      <div class="skill-card reveal-scale d4"><span class="skill-icon">📡</span><div><div class="skill-name">Computer Networks</div><div class="skill-sub">CN Fundamentals</div></div></div>
+      <div class="skill-card reveal-scale d1"><span class="skill-icon">💡</span><div><div class="skill-name">Digital Logic</div><div class="skill-sub">Gates · Circuits</div></div></div>
+      <div class="skill-card reveal-scale d2"><span class="skill-icon">🔗</span><div><div class="skill-name">Data Structures</div><div class="skill-sub">Lists · Queues · Trees</div></div></div>
+      <div class="skill-card reveal-scale d3"><span class="skill-icon">🖥️</span><div><div class="skill-name">Assembly</div><div class="skill-sub">EMU8086 · Low-Level</div></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="projects" class="section">
+  <div class="section-inner">
+    <p class="section-eyebrow reveal">What I've Built</p>
+    <h2 class="section-heading reveal d1">My <em>Projects</em></h2>
+    <div class="projects-list">
+      <div class="proj reveal d1"><span class="proj-num">01</span><span class="proj-emoji">🎮</span><div class="proj-body"><div class="proj-title">Tic Tac Toe Game</div><div class="proj-desc">Interactive game developed with logic-based implementation and user input handling.</div><div class="proj-tags"><span class="tag">C++</span><span class="tag">Game Logic</span></div></div></div>
+      <div class="proj reveal d2"><span class="proj-num">02</span><span class="proj-emoji">🏆</span><div class="proj-body"><div class="proj-title">Sports Management System</div><div class="proj-desc">Full system with GUI integrated with Oracle SQL Developer to manage teams, matches and players.</div><div class="proj-tags"><span class="tag">Java</span><span class="tag">Oracle SQL</span><span class="tag">GUI</span></div></div></div>
+      <div class="proj reveal d3"><span class="proj-num">03</span><span class="proj-emoji">🖥️</span><div class="proj-body"><div class="proj-title">Student Management System (Assembly)</div><div class="proj-desc">Low-level system built in EMU8086 Assembly for managing student records and operations.</div><div class="proj-tags"><span class="tag">Assembly</span><span class="tag">EMU8086</span></div></div></div>
+      <div class="proj reveal d4"><span class="proj-num">04</span><span class="proj-emoji">💡</span><div class="proj-body"><div class="proj-title">ESP32 LED Control via Mobile</div><div class="proj-desc">IoT project to control LED ON/OFF using ESP32 microcontroller through mobile WiFi.</div><div class="proj-tags"><span class="tag">ESP32</span><span class="tag">IoT</span><span class="tag">WiFi</span></div></div></div>
+      <div class="proj reveal d1"><span class="proj-num">05</span><span class="proj-emoji">♞</span><div class="proj-body"><div class="proj-title">Knight Travels Game</div><div class="proj-desc">Algorithm-based implementation of knight shortest path using BFS technique.</div><div class="proj-tags"><span class="tag">C++</span><span class="tag">BFS</span><span class="tag">DSA</span></div></div></div>
+      <div class="proj reveal d2"><span class="proj-num">06</span><span class="proj-emoji">🌐</span><div class="proj-body"><div class="proj-title">Computer Networks Lab Work</div><div class="proj-desc">Hands-on implementation of Web Server, FTP, Proxy settings and networking configurations.</div><div class="proj-tags"><span class="tag">Networking</span><span class="tag">FTP</span><span class="tag">Web Server</span></div></div></div>
+      <div class="proj reveal d3"><span class="proj-num">07</span><span class="proj-emoji">☁️</span><div class="proj-body"><div class="proj-title">Microsoft Azure</div><div class="proj-desc">Cloud computing tasks including VM creation, deployment and network configuration.</div><div class="proj-tags"><span class="tag">Azure</span><span class="tag">Cloud</span></div></div></div>
+      <div class="proj reveal d4"><span class="proj-num">08</span><span class="proj-emoji">📖</span><div class="proj-body"><div class="proj-title">Magazine Project</div><div class="proj-desc">Structured and designed a complete magazine with formatted content and layout.</div><div class="proj-tags"><span class="tag">Design</span><span class="tag">Content</span></div></div></div>
+      <a href="https://github.com/IrajHafeez/Customer-Service-Management-System-Using-Queue" target="_blank" class="proj reveal d1"><span class="proj-num">09</span><span class="proj-emoji">🎟️</span><div class="proj-body"><div class="proj-title">Customer Service Management System</div><div class="proj-desc">A queue-based service management system simulating real-world customer flow — ticket generation, priority handling, and service tracking using the Queue data structure.</div><div class="proj-tags"><span class="tag">C++</span><span class="tag">Queue</span><span class="tag">DSA</span></div></div><span class="proj-link">GitHub ↗</span></a>
+      <a href="https://github.com/IrajHafeez/Expression-Converter-Evaluator-Using-Stack-" target="_blank" class="proj reveal d2"><span class="proj-num">10</span><span class="proj-emoji">🧮</span><div class="proj-body"><div class="proj-title">Expression Converter &amp; Evaluator</div><div class="proj-desc">Converts infix expressions to postfix/prefix and evaluates them using a Stack. Demonstrates operator precedence, associativity, and stack-based computation.</div><div class="proj-tags"><span class="tag">C++</span><span class="tag">Stack</span><span class="tag">DSA</span></div></div><span class="proj-link">GitHub ↗</span></a>
+      <a href="https://github.com/IrajHafeez/Scott-Schema" target="_blank" class="proj reveal d3"><span class="proj-num">11</span><span class="proj-emoji">🗃️</span><div class="proj-body"><div class="proj-title">Scott Schema — Oracle DB</div><div class="proj-desc">SQL queries and operations on Oracle's classic SCOTT schema — covering joins, aggregations, subqueries, and relational data manipulation using EMP and DEPT tables.</div><div class="proj-tags"><span class="tag">SQL</span><span class="tag">Oracle</span><span class="tag">Database</span></div></div><span class="proj-link">GitHub ↗</span></a>
+      <a href="https://github.com/IrajHafeez/HR-Schema" target="_blank" class="proj reveal d4"><span class="proj-num">12</span><span class="proj-emoji">👥</span><div class="proj-body"><div class="proj-title">HR Schema — Oracle DB</div><div class="proj-desc">Database queries and exercises on Oracle's HR schema — working with employees, departments, jobs and locations tables using advanced SQL and relational concepts.</div><div class="proj-tags"><span class="tag">SQL</span><span class="tag">Oracle</span><span class="tag">Database</span></div></div><span class="proj-link">GitHub ↗</span></a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── HOBBIES SECTION ── -->
+<section id="hobbies" class="section">
+  <div class="section-inner">
+    <p class="section-eyebrow reveal">Beyond Code</p>
+    <h2 class="section-heading reveal d1">Hobbies &amp; <em>Interests</em></h2>
+    <div class="hobbies-grid">
+      <div class="hobby-card reveal-scale d1">
+        <span class="hobby-icon">📚</span>
+        <div class="hobby-name">Reading</div>
+        <div class="hobby-desc">Love exploring books on tech, self-growth and fiction</div>
+      </div>
+      <div class="hobby-card reveal-scale d2">
+        <span class="hobby-icon">💻</span>
+        <div class="hobby-name">Coding Practice</div>
+        <div class="hobby-desc">Solving DSA problems and building side projects</div>
+      </div>
+      <div class="hobby-card reveal-scale d3">
+        <span class="hobby-icon">🎨</span>
+        <div class="hobby-name">Designing</div>
+        <div class="hobby-desc">Creating UI layouts and visual content</div>
+      </div>
+      <div class="hobby-card reveal-scale d4">
+        <span class="hobby-icon">🔌</span>
+        <div class="hobby-name">Electronics</div>
+        <div class="hobby-desc">Tinkering with microcontrollers and IoT circuits</div>
+      </div>
+      <div class="hobby-card reveal-scale d2">
+        <span class="hobby-icon">🌐</span>
+        <div class="hobby-name">Exploring Tech</div>
+        <div class="hobby-desc">Staying updated on cloud, AI and new technologies</div>
+      </div>
+      <div class="hobby-card reveal-scale d3">
+        <span class="hobby-icon">🧩</span>
+        <div class="hobby-name">Problem Solving</div>
+        <div class="hobby-desc">Logic puzzles, algorithms and critical thinking</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="contact" class="section">
+  <div class="section-inner">
+    <p class="section-eyebrow reveal">Say Hello</p>
+    <h2 class="section-heading reveal d1">Get In <em>Touch</em></h2>
+    <div class="contact-grid">
+      <div class="reveal-left d2">
+        <p class="contact-intro">I'm always open to new opportunities, collaborations, and conversations. Whether you have a project idea, a question, or just want to connect — feel free to reach out!</p>
+        <div class="contact-cta"><a href="mailto:iirajhafeez@gmail.com">✉️ &nbsp;Send Me an Email</a></div>
+      </div>
+      <div class="contact-cards reveal-right d2">
+        <div class="contact-card"><span class="cc-icon">📍</span><div><div class="cc-label">Location</div><div class="cc-val">Rawalpindi, Pakistan</div></div></div>
+        <div class="contact-card"><span class="cc-icon">🎓</span><div><div class="cc-label">University</div><div class="cc-val">Fatima Jinnah Women University</div></div></div>
+        <a href="mailto:iirajhafeez@gmail.com" class="contact-card"><span class="cc-icon">📧</span><div><div class="cc-label">Email</div><div class="cc-val">iirajhafeez@gmail.com ↗</div></div></a>
+        <a href="https://github.com/IrajHafeez" target="_blank" class="contact-card"><span class="cc-icon">🐙</span><div><div class="cc-label">GitHub</div><div class="cc-val">github.com/IrajHafeez ↗</div></div></a>
+        <a href="https://www.linkedin.com/in/iraj-hafeez-052743406" target="_blank" class="contact-card"><span class="cc-icon">🔗</span><div><div class="cc-label">LinkedIn</div><div class="cc-val">Iraj Hafeez ↗</div></div></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 <strong>Iraj Hafeez</strong> · All Rights Reserved · Made with ❤️</p>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#hobbies">Hobbies</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal observer
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+  observer.observe(el);
+});
+
+// Navbar scroll effect
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  if (window.scrollY > 50) {
+    nav.style.background = 'rgba(10,10,15,0.98)';
+    nav.style.borderBottomColor = 'rgba(124,111,255,0.2)';
+  } else {
+    nav.style.background = 'rgba(10,10,15,0.85)';
+    nav.style.borderBottomColor = 'var(--border)';
+  }
+});
+
+// Active nav link highlight
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    if (window.scrollY >= section.offsetTop - 200) current = section.getAttribute('id');
+  });
+  navLinks.forEach(link => {
+    link.style.color = link.getAttribute('href') === '#' + current ? 'var(--accent3)' : '';
+  });
+});
+</script>
+</body>
+</html>
